@@ -1,0 +1,93 @@
+{
+  "id": "0",
+  "foods": [
+    {
+      "id": "0",
+      "name": "Vegetables",
+      "category": "Essential",
+      "categoryPriority": 0,
+      "priority": 0,
+      "count": 9
+    },
+    {
+      "id": "1",
+      "name": "Fruits",
+      "category": "Essential",
+      "categoryPriority": 0,
+      "priority": 1,
+      "count": 10
+    },
+    {
+      "id": "2",
+      "name": "Nuts, Seeds, and Healthy Oils",
+      "category": "Recommended",
+      "categoryPriority": 1,
+      "priority": 2,
+      "count": 5
+    },
+    {
+      "id": "3",
+      "name": "Fish and High-Quality Meats",
+      "category": "Recommended",
+      "categoryPriority": 1,
+      "priority": 3,
+      "count": 6
+    },
+    {
+      "id": "4",
+      "name": "Whole Grains",
+      "category": "Recommended",
+      "categoryPriority": 1,
+      "priority": 4,
+      "count": 7
+    },
+    {
+      "id": "5",
+      "name": "Dairy",
+      "category": "Recommended",
+      "categoryPriority": 1,
+      "priority": 5,
+      "count": 8
+    },
+    {
+      "id": "6",
+      "name": "Refined Grains",
+      "category": "Acceptable",
+      "categoryPriority": 2,
+      "priority": 6,
+      "count": 4
+    },
+    {
+      "id": "7",
+      "name": "Other Foods",
+      "category": "Acceptable",
+      "categoryPriority": 2,
+      "priority": 7,
+      "count": 0
+    },
+    {
+      "id": "8",
+      "name": "Low-Quality Meats",
+      "category": "Acceptable",
+      "categoryPriority": 2,
+      "priority": 8,
+      "count": 1
+    },
+    {
+      "id": "9",
+      "name": "Sweets",
+      "category": "Acceptable",
+      "categoryPriority": 2,
+      "priority": 9,
+      "count": 2
+    },
+    {
+      "id": "10",
+      "name": "Fried Foods",
+      "category": "Acceptable",
+      "categoryPriority": 2,
+      "priority": 10,
+      "count": 3
+    }
+  ]
+}
