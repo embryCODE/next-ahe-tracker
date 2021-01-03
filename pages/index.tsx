@@ -6,7 +6,7 @@ import {
   ThemeProvider,
   Typography,
 } from '@material-ui/core';
-import { TrackerForm } from './TrackerForm';
+import { TrackerForm } from './components/TrackerForm';
 import { useState } from 'react';
 import { getHealthStatusColor } from '../helpers';
 import { HealthContextValue, HealthStatus } from '../types';
@@ -18,7 +18,7 @@ theme = responsiveFontSizes(theme);
 
 export default function Home() {
   const [healthStatus, setHealthStatus] = useState<HealthStatus>(
-    HealthStatus.Good
+    HealthStatus.Unknown
   );
 
   const healthContextValue: HealthContextValue = [

@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
 export enum HealthStatus {
+  'Unknown',
   'Bad',
   'Warning',
   'Good',

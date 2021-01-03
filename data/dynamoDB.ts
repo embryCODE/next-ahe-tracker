@@ -10,9 +10,9 @@ const client = new aws.DynamoDB.DocumentClient({
 });
 
 export default {
-  get: (params) => client.get(params).promise(),
-  put: (params) => client.put(params).promise(),
-  query: (params) => client.query(params).promise(),
-  update: (params) => client.update(params).promise(),
-  delete: (params) => client.delete(params).promise(),
+  get: (params: any) => client.get(params).promise(),
+  put: (params: any) => client.put(params).promise(),
+  query: (params: any) => client.query(params).promise(),
+  update: (params: any) => client.update(params).promise(),
+  delete: (params: any) => client.delete(params).promise(),
 };

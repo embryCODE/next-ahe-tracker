@@ -8,5 +8,7 @@ export function getHealthStatusColor(healthStatus: HealthStatus): string {
       return 'rgba(238, 230, 87, 0.6)';
     case HealthStatus.Good:
       return 'rgba(46, 200, 144, 0.6)';
+    default:
+      return 'white';
   }
 }
