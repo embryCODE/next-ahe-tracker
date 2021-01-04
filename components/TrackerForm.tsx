@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Box, Button, debounce } from '@material-ui/core';
-import { Food } from '../../types';
+import { Food } from '../types';
 import { FoodInput } from './FoodInput';
 import axios from 'axios';
-import { updateFoods } from '../../data/net';
-import HealthContext from '../../data/HealthContext';
-import { calculateHealth } from '../../helpers';
-import { combineFoodsByCategory } from '../../helpers';
+import { updateFoods } from '../data/net';
+import HealthContext from '../data/HealthContext';
+import { calculateHealth } from '../helpers';
+import { combineFoodsByCategory } from '../helpers';
 
 const debouncedUpdateFoods = debounce(
   (foods) =>

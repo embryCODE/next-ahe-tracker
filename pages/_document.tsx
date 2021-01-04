@@ -5,14 +5,14 @@ import flush from 'styled-jsx/server';
 import React from 'react';
 
 export default class MyDocument extends Document {
-  static async getInitialProps(ctx) {
+  static async getInitialProps(ctx: any) {
     const styledComponentSheet = new StyledComponentSheets();
     const materialUiSheets = new MaterialUiServerStyleSheets();
     const originalRenderPage = ctx.renderPage;
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) =>
+          enhanceApp: (App: any) => (props: any) =>
             styledComponentSheet.collectStyles(
               materialUiSheets.collect(<App {...props} />)
             ),

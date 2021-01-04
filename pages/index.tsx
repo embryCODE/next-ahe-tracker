@@ -6,7 +6,7 @@ import {
   ThemeProvider,
   Typography,
 } from '@material-ui/core';
-import { TrackerForm } from './components/TrackerForm';
+import { TrackerForm } from '../components/TrackerForm';
 import { useState } from 'react';
 import { getHealthStatusColor } from '../helpers';
 import { HealthContextValue, HealthStatus } from '../types';

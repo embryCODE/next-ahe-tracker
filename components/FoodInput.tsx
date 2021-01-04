@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
-import { Food } from '../../types';
+import { Food } from '../types';
 
 interface FoodInputProps {
   food: Food;
