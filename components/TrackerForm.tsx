@@ -19,6 +19,40 @@ const debouncedUpdateFoods = debounce(
   1000
 )
 
+function renderStatus(health: HealthStatus) {
+  switch (health) {
+    case HealthStatus.ExtraCredit:
+      return (
+        <>
+          Extra credit!
+          <Box ml={1} fontSize={24} component="span">
+            💪
+          </Box>
+        </>
+      )
+    case HealthStatus.Good:
+      return (
+        <>
+          All good!
+          <Box ml={1} fontSize={24} component="span">
+            ✔
+          </Box>
+        </>
+      )
+    case HealthStatus.Bad:
+      return (
+        <>
+          Doh!
+          <Box ml={1} fontSize={24} component="span">
+            🤦
+          </Box>
+        </>
+      )
+    default:
+      return null
+  }
+}
+
 const TrackerForm: React.FC = () => {
   const [foods, setFoods] = useState<Food[] | undefined>()
   const [health, setHealth] = useContext(HealthContext)
@@ -57,14 +91,9 @@ const TrackerForm: React.FC = () => {
 
   return (
     <Box py={1} position="relative">
-      {health === HealthStatus.ExtraCredit && (
-        <Box position="absolute" top={8} right={0}>
-          Extra credit!{' '}
-          <Box fontSize={24} component="span">
-            💪
-          </Box>
-        </Box>
-      )}
+      <Box position="absolute" top={8} right={0}>
+        {renderStatus(health)}
+      </Box>
 
       <form>
         {Object.entries(foodsByCategory).map(([key, value]) => {
