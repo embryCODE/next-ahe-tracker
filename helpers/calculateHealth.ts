@@ -4,10 +4,7 @@ import { combineFoodsByCategory } from './combineFoodsByCategory';
 export function calculateHealth(foods: Food[]): HealthStatus {
   validateFoods(foods);
 
-  const foodsByPriority = foods
-    .sort((x, y) => x.priority - y.priority)
-    // Foods not eaten at all don't factor into any calculations
-    .filter((food) => food.count);
+  const foodsByPriority = foods.sort((x, y) => x.priority - y.priority);
 
   if (isGood(foodsByPriority)) return HealthStatus.Good;
   if (isWarning(foodsByPriority)) return HealthStatus.Warning;
@@ -18,12 +15,15 @@ export function calculateHealth(foods: Food[]): HealthStatus {
 function isGood(foods: Food[]) {
   // Loop over the foods in order of priority, starting at 0
   // If the count of each food is less than the food before it, return true
-  return foods.every((food, i) => {
-    let previousFood = foods[i - 1];
+  return foods.every((currentFood, i) => {
+    const previousFood = foods[i - 1];
 
     if (!previousFood) return true;
 
-    return food.count < previousFood.count;
+    // Zeros really make this kinda screwy
+    if (currentFood.count === 0 && previousFood.count === 0) return true;
+
+    return currentFood.count < previousFood.count;
   });
 }
 
@@ -49,10 +49,12 @@ function isWarning(foods: Food[]) {
 
     // If the lowest count in the current category is greater than
     // the highest count in every category after it, return true
-    return categoriesAfterThis.every(
-      (categoryAfterThis) =>
-        category.lowestCount > categoryAfterThis.highestCount
-    );
+    return categoriesAfterThis.every((categoryAfterThis) => {
+      // Zeros really make this kinda screwy
+      if (category.lowestCount === 0 && categoryAfterThis.highestCount === 0) return true;
+
+      return category.lowestCount > categoryAfterThis.highestCount;
+    });
   });
 }
 
