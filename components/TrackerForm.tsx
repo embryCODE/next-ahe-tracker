@@ -1,69 +1,69 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Box, Button, debounce } from '@material-ui/core';
-import { Food } from '../types';
-import { FoodInput } from './FoodInput';
-import axios from 'axios';
-import { updateFoods } from '../data/net';
-import HealthContext from '../data/HealthContext';
-import { calculateHealth } from '../helpers';
-import { combineFoodsByCategory } from '../helpers';
+import React, { useContext, useEffect, useState } from 'react'
+import { Box, Button, debounce, Typography } from '@material-ui/core';
+import { Food } from '../types'
+import { FoodInput } from './FoodInput'
+import axios from 'axios'
+import { updateFoods } from '../data/net'
+import HealthContext from '../data/HealthContext'
+import { calculateHealth } from '../helpers'
+import { combineFoodsByCategory } from '../helpers'
 
 const debouncedUpdateFoods = debounce(
   (foods) =>
     updateFoods(foods)
       .then(() => {
-        console.log('Foods were saved');
+        console.log('Foods were saved')
       })
       .catch((err) => {
-        console.error('Foods were not saved:', err);
+        console.error('Foods were not saved:', err)
       }),
   1000
-);
+)
 
 const TrackerForm: React.FC = () => {
-  const [foods, setFoods] = useState<Food[] | undefined>();
-  const [, setHealth] = useContext(HealthContext);
+  const [foods, setFoods] = useState<Food[] | undefined>()
+  const [, setHealth] = useContext(HealthContext)
 
   useEffect(() => {
     axios.get<Food[]>('/api/foods').then((res) => {
-      setFoods(res.data);
-    });
-  }, []);
+      setFoods(res.data)
+    })
+  }, [])
 
   useEffect(() => {
-    if (foods === undefined) return;
+    if (foods === undefined) return
 
     // noinspection JSIgnoredPromiseFromCall
-    debouncedUpdateFoods(foods);
-    setHealth(calculateHealth(foods));
-  }, [foods]);
+    debouncedUpdateFoods(foods)
+    setHealth(calculateHealth(foods))
+  }, [foods])
 
   if (foods === undefined) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
-  const foodsByCategory = combineFoodsByCategory(foods);
+  const foodsByCategory = combineFoodsByCategory(foods)
 
   const handleCountChange = (id: string) => (count: number) => {
     const updatedFoods = foods.map((f) => {
-      return f.id === id ? { ...f, count } : f;
-    });
+      return f.id === id ? { ...f, count } : f
+    })
 
-    setFoods(updatedFoods);
-  };
+    setFoods(updatedFoods)
+  }
 
   const handleResetAll = () => {
-    setFoods(foods.map((f) => ({ ...f, count: 0 })));
-  };
+    setFoods(foods.map((f) => ({ ...f, count: 0 })))
+  }
 
   return (
-    <>
+    <Box py={2}>
       <form>
         {Object.entries(foodsByCategory).map(([key, value]) => {
           return (
             <Box key={key}>
-              <h2>{key}</h2>
-              <Box>
+              <Typography variant="h4">{key}</Typography>
+              <Box my={2}>
                 {value
                   .sort((x, y) => x.priority - y.priority)
                   .map((food) => (
@@ -75,7 +75,7 @@ const TrackerForm: React.FC = () => {
                   ))}
               </Box>
             </Box>
-          );
+          )
         })}
       </form>
 
@@ -84,8 +84,8 @@ const TrackerForm: React.FC = () => {
           Reset all
         </Button>
       </Box>
-    </>
-  );
-};
+    </Box>
+  )
+}
 
-export { TrackerForm };
+export { TrackerForm }

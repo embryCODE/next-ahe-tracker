@@ -1,35 +1,39 @@
-import Head from 'next/head';
+import Head from 'next/head'
 import {
   Box,
   Container,
   Paper,
   ThemeProvider,
   Typography,
-} from '@material-ui/core';
-import { TrackerForm } from '../components/TrackerForm';
-import { useState } from 'react';
-import { getHealthStatusColor } from '../helpers';
-import { HealthContextValue, HealthStatus } from '../types';
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
-import HealthContext from '../data/HealthContext';
+} from '@material-ui/core'
+import { TrackerForm } from '../components/TrackerForm'
+import { useState } from 'react'
+import { getHealthStatusColor } from '../helpers'
+import { HealthContextValue, HealthStatus } from '../types'
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
+import HealthContext from '../data/HealthContext'
 
-let theme = createMuiTheme();
-theme = responsiveFontSizes(theme);
+let theme = createMuiTheme()
+theme = responsiveFontSizes(theme)
 
 export default function Home() {
   const [healthStatus, setHealthStatus] = useState<HealthStatus>(
     HealthStatus.Unknown
-  );
+  )
 
   const healthContextValue: HealthContextValue = [
     HealthStatus.Good,
     setHealthStatus,
-  ];
+  ]
 
   return (
     <HealthContext.Provider value={healthContextValue}>
       <ThemeProvider theme={theme}>
-        <Box p={2} minHeight="100vh" bgcolor={getHealthStatusColor(healthStatus)}>
+        <Box
+          p={2}
+          minHeight="100vh"
+          bgcolor={getHealthStatusColor(healthStatus)}
+        >
           <Head>
             <title>Agnostic Healthy Eating Tracker</title>
             <link rel="icon" href="/favicon.ico" />
@@ -64,5 +68,5 @@ export default function Home() {
         </Box>
       </ThemeProvider>
     </HealthContext.Provider>
-  );
+  )
 }

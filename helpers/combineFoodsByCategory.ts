@@ -1,13 +1,13 @@
-import { Food } from '../types';
+import { Food } from '../types'
 
-export function combineFoodsByCategory (foods: Food[]): Record<string, Food[]> {
+export function combineFoodsByCategory(foods: Food[]): Record<string, Food[]> {
   return foods.reduce<Record<string, Food[]>>((acc, curr) => {
     if (acc[curr.category]) {
-      acc[curr.category].push(curr);
+      acc[curr.category].push(curr)
     } else {
-      acc[curr.category] = [curr];
+      acc[curr.category] = [curr]
     }
 
-    return acc;
-  }, {});
+    return acc
+  }, {})
 }
