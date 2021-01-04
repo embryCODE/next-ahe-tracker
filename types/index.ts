@@ -3,8 +3,8 @@ import { Dispatch, SetStateAction } from 'react'
 export enum HealthStatus {
   'Unknown',
   'Bad',
-  'Warning',
   'Good',
+  'ExtraCredit',
 }
 
 export interface Food {
@@ -16,7 +16,4 @@ export interface Food {
   categoryPriority: number
 }
 
-export type HealthContextValue = [
-  HealthStatus,
-  Dispatch<SetStateAction<HealthStatus>>
-]
+export type HealthContextValue = [HealthStatus, Dispatch<SetStateAction<HealthStatus>>]

@@ -13,9 +13,7 @@ export default class MyDocument extends Document {
       ctx.renderPage = () =>
         originalRenderPage({
           enhanceApp: (App: any) => (props: any) =>
-            styledComponentSheet.collectStyles(
-              materialUiSheets.collect(<App {...props} />)
-            ),
+            styledComponentSheet.collectStyles(materialUiSheets.collect(<App {...props} />)),
         })
       const initialProps = await Document.getInitialProps(ctx)
       return {

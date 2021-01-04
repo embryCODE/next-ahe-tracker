@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Box, Button, debounce, Typography } from '@material-ui/core';
-import { Food } from '../types'
+import { Box, Button, debounce, Typography } from '@material-ui/core'
+import { Food, HealthStatus } from '../types'
 import { FoodInput } from './FoodInput'
 import axios from 'axios'
 import { updateFoods } from '../data/net'
 import HealthContext from '../data/HealthContext'
-import { calculateHealth } from '../helpers'
-import { combineFoodsByCategory } from '../helpers'
+import { calculateHealth, combineFoodsByCategory } from '../helpers'
 
 const debouncedUpdateFoods = debounce(
   (foods) =>
@@ -22,7 +21,7 @@ const debouncedUpdateFoods = debounce(
 
 const TrackerForm: React.FC = () => {
   const [foods, setFoods] = useState<Food[] | undefined>()
-  const [, setHealth] = useContext(HealthContext)
+  const [health, setHealth] = useContext(HealthContext)
 
   useEffect(() => {
     axios.get<Food[]>('/api/foods').then((res) => {
@@ -57,7 +56,16 @@ const TrackerForm: React.FC = () => {
   }
 
   return (
-    <Box py={2}>
+    <Box py={1} position="relative">
+      {health === HealthStatus.ExtraCredit && (
+        <Box position="absolute" top={8} right={0}>
+          Extra credit!{' '}
+          <Box fontSize={24} component="span">
+            💪
+          </Box>
+        </Box>
+      )}
+
       <form>
         {Object.entries(foodsByCategory).map(([key, value]) => {
           return (
@@ -67,11 +75,7 @@ const TrackerForm: React.FC = () => {
                 {value
                   .sort((x, y) => x.priority - y.priority)
                   .map((food) => (
-                    <FoodInput
-                      key={food.name}
-                      food={food}
-                      onCountChange={handleCountChange(food.id)}
-                    />
+                    <FoodInput key={food.name} food={food} onCountChange={handleCountChange(food.id)} />
                   ))}
               </Box>
             </Box>

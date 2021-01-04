@@ -6,8 +6,8 @@ export function calculateHealth(foods: Food[]): HealthStatus {
 
   const foodsByPriority = foods.sort((x, y) => x.priority - y.priority)
 
-  if (isGood(foodsByPriority)) return HealthStatus.Good
-  if (isWarning(foodsByPriority)) return HealthStatus.Warning
+  if (isGood(foodsByPriority)) return HealthStatus.ExtraCredit
+  if (isWarning(foodsByPriority)) return HealthStatus.Good
 
   return HealthStatus.Bad
 }
@@ -51,8 +51,7 @@ function isWarning(foods: Food[]) {
     // the highest count in every category after it, return true
     return categoriesAfterThis.every((categoryAfterThis) => {
       // Zeros really make this kinda screwy
-      if (category.lowestCount === 0 && categoryAfterThis.highestCount === 0)
-        return true
+      if (category.lowestCount === 0 && categoryAfterThis.highestCount === 0) return true
 
       return category.lowestCount > categoryAfterThis.highestCount
     })

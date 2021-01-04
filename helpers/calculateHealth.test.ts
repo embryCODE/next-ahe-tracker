@@ -1,13 +1,13 @@
 import { calculateHealth } from './calculateHealth'
 import { Food, HealthStatus } from '../types'
 import defaultUser from '../fixtures/defaultUser.json'
+import extraCreditUser from '../fixtures/extraCreditUser.json'
 import goodUser from '../fixtures/goodUser.json'
-import warningUser from '../fixtures/warningUser.json'
 import badUser from '../fixtures/badUser.json'
 
 const defaultFoods = (defaultUser.foods as unknown) as Food[]
+const extraCreditFoods = (extraCreditUser.foods as unknown) as Food[]
 const goodFoods = (goodUser.foods as unknown) as Food[]
-const warningFoods = (warningUser.foods as unknown) as Food[]
 const badFoods = (badUser.foods as unknown) as Food[]
 
 describe('calculateHealth', function () {
@@ -33,31 +33,31 @@ describe('calculateHealth', function () {
     expect(() => calculateHealth([])).toThrow()
   })
 
-  it('should return Good if all counts are 0', function () {
-    expect(calculateHealth(defaultFoods)).toBe(HealthStatus.Good)
+  it('should return ExtraCredit if all counts are 0', function () {
+    expect(calculateHealth(defaultFoods)).toBe(HealthStatus.ExtraCredit)
   })
 
-  it('should return Good if all counts are in descending order', function () {
-    expect(calculateHealth(goodFoods)).toBe(HealthStatus.Good)
+  it('should return ExtraCredit if all counts are in descending order', function () {
+    expect(calculateHealth(extraCreditFoods)).toBe(HealthStatus.ExtraCredit)
   })
 
-  it('should return Good if all counts are in descending order or zero', function () {
+  it('should return ExtraCredit if all counts are in descending order or zero', function () {
     const foodsToTest = [...defaultFoods]
     foodsToTest[0].count = 1
     foodsToTest[1].count = 0
 
-    expect(calculateHealth(foodsToTest)).toBe(HealthStatus.Good)
+    expect(calculateHealth(foodsToTest)).toBe(HealthStatus.ExtraCredit)
   })
 
-  it('should return Warning if categories are in order', function () {
-    expect(calculateHealth(warningFoods)).toBe(HealthStatus.Warning)
+  it('should return Good if categories are in order', function () {
+    expect(calculateHealth(goodFoods)).toBe(HealthStatus.Good)
   })
 
-  it('should return Warning if even for zeros ', function () {
+  it('should return Good if even for zeros ', function () {
     const foodsToTest = [...defaultFoods]
     foodsToTest[1].count = 1
 
-    expect(calculateHealth(foodsToTest)).toBe(HealthStatus.Warning)
+    expect(calculateHealth(foodsToTest)).toBe(HealthStatus.Good)
   })
 
   it('should handle this edge case ', function () {

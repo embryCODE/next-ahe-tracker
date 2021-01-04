@@ -6,7 +6,7 @@ const fakeDispatch = () => {
 }
 
 const healthContextValue: HealthContextValue = [
-  HealthStatus.Good,
+  HealthStatus.ExtraCredit,
   fakeDispatch as Dispatch<SetStateAction<HealthStatus>>,
 ]
 
